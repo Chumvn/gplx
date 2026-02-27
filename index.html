@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GPLX 2026 - Ứng dụng luyện thi bằng lái xe 600 câu hỏi mới nhất">
+  <meta name="theme-color" content="#1a1a2e">
+  <title>GPLX 2026 – Luyện Thi Bằng Lái Xe</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="./assets/icons/icon-192.png">
+</head>
+
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">🚗</span>
+          <h1>GPLX <span class="accent">2026</span></h1>
+        </div>
+        <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Views -->
+    <main id="mainContent">
+      <!-- Dashboard View -->
+      <section id="viewDashboard" class="view active">
+        <!-- Stats Banner -->
+        <div class="stats-banner neu-card">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-num" id="statTotal">0</span>
+              <span class="stat-label">Đã làm</span>
+            </div>
+            <div class="stat-item correct">
+              <span class="stat-num" id="statCorrect">0</span>
+              <span class="stat-label">Đúng</span>
+            </div>
+            <div class="stat-item wrong">
+              <span class="stat-num" id="statWrong">0</span>
+              <span class="stat-label">Sai</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num" id="statPercent">0%</span>
+              <span class="stat-label">Tỷ lệ</span>
+            </div>
+          </div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" id="progressBar" style="width:0%"></div>
+          </div>
+          <p class="progress-text" id="progressText">0/600 câu hỏi</p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+          <button class="action-btn primary" onclick="App.startPractice('all')">
+            <span class="action-icon">📖</span>
+            <span>Ôn tập tất cả</span>
+          </button>
+          <button class="action-btn accent" onclick="App.startExam('B')">
+            <span class="action-icon">📝</span>
+            <span>Thi thử B</span>
+          </button>
+          <button class="action-btn" onclick="App.showBookmarks()">
+            <span class="action-icon">⭐</span>
+            <span>Đã đánh dấu</span>
+          </button>
+          <button class="action-btn" onclick="App.showWrongAnswers()">
+            <span class="action-icon">❌</span>
+            <span>Câu sai</span>
+          </button>
+        </div>
+
+        <!-- Topics -->
+        <h2 class="section-title">Ôn tập theo chủ đề</h2>
+        <div class="topics-grid" id="topicsGrid"></div>
+
+        <!-- Exam Section -->
+        <h2 class="section-title">📋 Thi sát hạch lý thuyết</h2>
+        <h3 class="sub-title">🏍️ Hạng mô tô</h3>
+        <div class="exam-cards">
+          <div class="exam-card neu-card" onclick="App.startExam('A1')">
+            <h3>Sát Hạch A1</h3>
+            <p>Mô tô ≤ 125cc</p>
+            <div class="exam-info">
+              <span>📝 25 câu</span><span>⏱️ 19p</span><span>✅ 21/25</span>
+            </div>
+          </div>
+          <div class="exam-card neu-card" onclick="App.startExam('A')">
+            <h3>Sát Hạch A</h3>
+            <p>Mô tô > 125cc</p>
+            <div class="exam-info">
+              <span>📝 25 câu</span><span>⏱️ 19p</span><span>✅ 21/25</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="sub-title">🚗 Hạng ô tô</h3>
+        <div class="exam-cards">
+          <div class="exam-card neu-card" onclick="App.startExam('B')">
+            <div class="exam-badge popular">Phổ biến</div>
+            <h3>Sát Hạch B</h3>
+            <p>Ô tô con, xe ≤ 9 chỗ</p>
+            <div class="exam-info">
+              <span>📝 30 câu</span><span>⏱️ 20p</span><span>✅ 27/30</span>
+            </div>
+          </div>
+          <div class="exam-card neu-card" onclick="App.startExam('C1')">
+            <h3>Sát Hạch C1</h3>
+            <p>Xe tải 3.5t – 7.5t</p>
+            <div class="exam-info">
+              <span>📝 35 câu</span><span>⏱️ 22p</span><span>✅ 32/35</span>
+            </div>
+          </div>
+          <div class="exam-card neu-card" onclick="App.startExam('C')">
+            <h3>Sát Hạch C</h3>
+            <p>Xe tải > 7.5t</p>
+            <div class="exam-info">
+              <span>📝 40 câu</span><span>⏱️ 24p</span><span>✅ 36/40</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="sub-title">🚌 Hạng chở khách</h3>
+        <div class="exam-cards">
+          <div class="exam-card neu-card" onclick="App.startExam('D1')">
+            <h3>Sát Hạch D1</h3>
+            <p>Chở người 9 – 16 chỗ</p>
+            <div class="exam-info">
+              <span>📝 40 câu</span><span>⏱️ 24p</span><span>✅ 36/40</span>
+            </div>
+          </div>
+          <div class="exam-card neu-card" onclick="App.startExam('D2')">
+            <h3>Sát Hạch D2</h3>
+            <p>Chở người 17 – 29 chỗ</p>
+            <div class="exam-info">
+              <span>📝 40 câu</span><span>⏱️ 24p</span><span>✅ 36/40</span>
+            </div>
+          </div>
+          <div class="exam-card neu-card" onclick="App.startExam('D')">
+            <h3>Sát Hạch D</h3>
+            <p>Chở người > 29 chỗ</p>
+            <div class="exam-info">
+              <span>📝 45 câu</span><span>⏱️ 26p</span><span>✅ 41/45</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="sub-title">🔄 Hạng nâng cấp (kéo rơ moóc)</h3>
+        <div class="exam-cards">
+          <div class="exam-card neu-card" onclick="App.startExam('BE')">
+            <h3>Sát Hạch BE</h3>
+            <p>B kéo rơ moóc > 750kg</p>
+            <div class="exam-info">
+              <span>📝 35 câu</span><span>⏱️ 22p</span><span>✅ 32/35</span>
+            </div>
+          </div>
+          <div class="exam-card neu-card" onclick="App.startExam('CE')">
+            <h3>Sát Hạch CE</h3>
+            <p>C kéo rơ moóc > 750kg</p>
+            <div class="exam-info">
+              <span>📝 40 câu</span><span>⏱️ 24p</span><span>✅ 36/40</span>
+            </div>
+          </div>
+          <div class="exam-card neu-card" onclick="App.startExam('DE')">
+            <h3>Sát Hạch DE</h3>
+            <p>D kéo rơ moóc, xe nối toa</p>
+            <div class="exam-info">
+              <span>📝 45 câu</span><span>⏱️ 26p</span><span>✅ 41/45</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Diem Liet Warning -->
+        <div class="diem-liet-warn neu-card">
+          <h3>⚠️ Câu điểm liệt</h3>
+          <p>Bộ 600 câu có <strong>60 câu điểm liệt</strong> về tình huống mất an toàn giao thông. Trả lời sai bất kỳ
+            câu điểm liệt nào sẽ bị <strong>TRƯỢT</strong> ngay lập tức.</p>
+          <button class="btn-outline" onclick="App.startPractice('diem-liet')">Ôn tập câu điểm liệt</button>
+        </div>
+      </section>
+
+      <!-- Practice/Exam View -->
+      <section id="viewQuestion" class="view">
+        <div class="q-header">
+          <button class="back-btn" onclick="App.goHome()">← Quay lại</button>
+          <div class="q-meta">
+            <span id="qCounter">1/600</span>
+            <span id="qTimer" class="timer hidden"></span>
+          </div>
+          <button id="qBookmark" class="bookmark-btn" onclick="App.toggleBookmark()">☆</button>
+        </div>
+
+        <div class="q-progress-bar-wrap">
+          <div class="q-progress-bar" id="qProgressBar" style="width:0%"></div>
+        </div>
+
+        <div class="q-body neu-card">
+          <div class="q-badge-row">
+            <span id="qChapterBadge" class="chapter-badge"></span>
+            <span id="qDiemLietBadge" class="diem-liet-badge hidden">🔥 Điểm liệt</span>
+          </div>
+          <h2 class="q-text" id="qText"></h2>
+          <div class="q-images hidden" id="qImages"></div>
+          <div class="q-options" id="qOptions"></div>
+          <div class="q-explain hidden" id="qExplain">
+            <div class="explain-icon">✅</div>
+            <p id="qExplainText"></p>
+          </div>
+        </div>
+
+        <div class="q-nav">
+          <button class="nav-btn" id="btnPrev" onclick="App.prevQuestion()">← Trước</button>
+          <button class="nav-btn" id="btnCheck" onclick="App.checkAnswer()">Kiểm tra</button>
+          <button class="nav-btn primary" id="btnNext" onclick="App.nextQuestion()">Tiếp →</button>
+        </div>
+
+        <!-- Question Grid (for exam review) -->
+        <div class="q-grid-overlay hidden" id="qGridOverlay">
+          <div class="q-grid-panel">
+            <div class="q-grid-header">
+              <h3>Danh sách câu hỏi</h3>
+              <button onclick="App.toggleGrid()">✕</button>
+            </div>
+            <div class="q-grid" id="qGrid"></div>
+            <div class="q-grid-footer">
+              <button class="btn-outline" onclick="App.submitExam()">Nộp bài</button>
+            </div>
+          </div>
+        </div>
+
+        <button class="grid-toggle-btn" id="gridToggleBtn" onclick="App.toggleGrid()">
+          <span>▦</span> <span id="gridBtnText">Danh sách</span>
+        </button>
+      </section>
+
+      <!-- Result View -->
+      <section id="viewResult" class="view">
+        <div class="result-card neu-card">
+          <div id="resultIcon" class="result-icon">🎉</div>
+          <h2 id="resultTitle">Kết quả</h2>
+          <div class="result-score">
+            <span class="score-big" id="resultScore">0/0</span>
+          </div>
+          <div class="result-details" id="resultDetails"></div>
+          <div class="result-actions">
+            <button class="action-btn primary" onclick="App.goHome()">Về trang chính</button>
+            <button class="action-btn" onclick="App.reviewExam()">Xem lại bài</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>GPLX 2026 © Bộ 600 câu hỏi – Cục CSGT</p>
+    </footer>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+
+</html>
